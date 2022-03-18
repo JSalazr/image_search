@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import SearchInput from "./searchInput";
 import "../App.css";
 import { searchImages } from "../utils/searchUtils";
+import ImageList from "./imageList";
+
+interface ImagesContextValues {
+  imageList: Array<object>;
+  setImageList: Function;
+}
+
+const ImagesContext = createContext<ImagesContextValues | null>(null);
 
 const App = () => {
-  const [imageList, setImageList] = useState([]);
+  const [imageList, setImageList] = useState<Array<object>>([]);
+
+  const contextValues : ImagesContextValues = {imageList, setImageList};
 
   const handleImageSearch = (searchText : string) => {
     searchImages({
@@ -12,7 +22,7 @@ const App = () => {
       page: 1,
       pageSize: 10
     }).then(response => {
-      console.log(response.response);
+      setImageList(response.response ? response.response.results : []);
     }).catch((error) => {
       console.log(error);
     })
@@ -22,9 +32,12 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <SearchInput handleImageSearch={handleImageSearch}/>
+        <ImagesContext.Provider value={contextValues}>
+          <ImageList />
+        </ImagesContext.Provider>
       </header>
     </div>
   );
 };
 
-export default App;
+export { ImagesContext, App };
