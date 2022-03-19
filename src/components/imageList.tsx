@@ -1,17 +1,24 @@
-import React, { useContext } from "react";
-import { ImagesContext } from "./App";
+import React from "react";
+import { ImageData } from "../types";
 import ImageContainer from "./imageContainer";
 
-const ImageList = () => {
-  const contextValues = useContext(ImagesContext);
-
+interface ImageListProps {
+  imageList: Array<ImageData>
+}
+/**
+ * Text input to search images
+ */
+const ImageList = ({imageList} : ImageListProps) => {
   return (
     <>
-      {
-        contextValues?.imageList.map((imageData : any) => 
-          <ImageContainer url={imageData.urls.small} />
-        )
-      }
+      {imageList.map((imageData: ImageData) => (
+        <ImageContainer
+          key={imageData.id}
+          id={imageData.id}
+          url={imageData.urls.small}
+          description={imageData.description}
+        />
+      ))}
     </>
   );
 };

@@ -1,12 +1,14 @@
 import React from "react";
 
 interface ImageContainerProps {
-  url: string
+  id: string;
+  description: string;
+  url: string;
 }
 
-const ImageContainer = ({url} : ImageContainerProps) => {
+const ImageContainer = ({id, url, description} : ImageContainerProps) => {
   return (
-    <img src={url} alt='idk' />
+    <img key={id} src={url} alt={description} />
   );
 };
 

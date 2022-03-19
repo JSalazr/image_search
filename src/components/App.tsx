@@ -1,43 +1,44 @@
-import React, { createContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchInput from "./searchInput";
 import "../App.css";
-import { searchImages } from "../utils/searchUtils";
+import { searchImages } from "../queries/searchQueries";
 import ImageList from "./imageList";
-
-interface ImagesContextValues {
-  imageList: Array<object>;
-  setImageList: Function;
-}
-
-const ImagesContext = createContext<ImagesContextValues | null>(null);
+import { ImageData, SearchResponse, SearchQuery } from "../types";
+import PaginationControl from "./paginationControl";
 
 const App = () => {
-  const [imageList, setImageList] = useState<Array<object>>([]);
+  const [imageList, setImageList] = useState<Array<ImageData>>([]);
+  const [query, setQuery] = useState<SearchQuery>({page: 1, text: ""});
+  const [totalPages, setTotalPages] = useState<number>(1);
 
-  const contextValues : ImagesContextValues = {imageList, setImageList};
+  useEffect(() => {
+    const handleImageSearch = () => {
+      searchImages({
+        text: query.text,
+        page: query.page,
+        pageSize: 10
+      }).then((response : SearchResponse) => {
+        console.log(response);
+        setImageList(response.response?.results || []);
+        setTotalPages(response.response?.total_pages || 1);
+      }).catch((error) => {
+        console.log(error);
+      })
+    }
 
-  const handleImageSearch = (searchText : string) => {
-    searchImages({
-      text: searchText,
-      page: 1,
-      pageSize: 10
-    }).then(response => {
-      setImageList(response.response ? response.response.results : []);
-    }).catch((error) => {
-      console.log(error);
-    })
-  }
+    if(query.text !== "")
+      handleImageSearch();
+  }, [query]);
 
   return (
     <div className="App">
       <header className="App-header">
-        <SearchInput handleImageSearch={handleImageSearch}/>
-        <ImagesContext.Provider value={contextValues}>
-          <ImageList />
-        </ImagesContext.Provider>
+        <SearchInput query={query} setQuery={setQuery}/>
+        <ImageList imageList={imageList}/>
+        <PaginationControl query={query} setQuery={setQuery} totalPages={totalPages} />
       </header>
     </div>
   );
 };
 
-export { ImagesContext, App };
+export default App;
