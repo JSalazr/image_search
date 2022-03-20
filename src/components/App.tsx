@@ -5,28 +5,31 @@ import { searchImages } from "../queries/searchQueries";
 import ImageListContainer from "./imageListContainer";
 import { ImageData, SearchResponse, SearchQuery } from "../types";
 import PaginationControl from "./paginationControl";
-import { Grid } from "@mui/material";
+import { CircularProgress, Grid } from "@mui/material";
 import Title from "./title";
 
 const App = () => {
   const [imageList, setImageList] = useState<Array<ImageData>>([]);
   const [query, setQuery] = useState<SearchQuery>({ page: 1, text: "" });
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const handleImageSearch = () => {
+      setIsLoading(true);
       searchImages({
         text: query.text,
         page: query.page,
         pageSize: 10,
       })
         .then((response: SearchResponse) => {
-          console.log(response);
           setImageList(response.response?.results || []);
           setTotalPages(response.response?.total_pages || 1);
+          setIsLoading(false);
         })
         .catch((error) => {
           console.log(error);
+          setIsLoading(false);
         });
     };
 
@@ -43,10 +46,13 @@ const App = () => {
           <Grid item>
             <SearchInput query={query} setQuery={setQuery} />
           </Grid>
-          <Grid item>
-            <ImageListContainer imageList={imageList} />
-          </Grid>
-          {query.text !== "" && (
+          {isLoading && (<CircularProgress />)}
+          {(!isLoading && query.text !== "") && (
+            <Grid item>
+              <ImageListContainer imageList={imageList} />
+            </Grid>
+          )}
+          {(!isLoading && query.text !== "") && (
             <Grid item>
               <PaginationControl
                 query={query}
