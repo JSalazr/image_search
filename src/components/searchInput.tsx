@@ -1,6 +1,7 @@
 import React from "react";
 import _ from "lodash";
 import {SearchQuery } from "../types";
+import { TextField } from "@mui/material";
 
 interface SearchInputProps {
   query: SearchQuery
@@ -15,11 +16,12 @@ const SearchInput = ({query, setQuery} : SearchInputProps) => {
   };
 
   return (
-    <input
+    <TextField
       type="text"
       placeholder="Search..."
       defaultValue={query.text}
       onChange={_.debounce(handleChange, 300)}
+      className="search-bar"
     />
   );
 };

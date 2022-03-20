@@ -1,5 +1,5 @@
+import { Button } from "@mui/material";
 import React from "react";
-import _ from "lodash";
 import {SearchQuery } from "../types";
 
 interface PaginationControlProps {
@@ -17,19 +17,19 @@ const PaginationControl = ({query, setQuery, totalPages} : PaginationControlProp
 
   return (
     <>
-      <button 
+      <Button 
         onClick={handleOnClick(-1)}
         disabled={query.page === 1}
       >
         prev
-      </button>
-        {query.page}
-      <button 
+      </Button>
+        <span>{query.page}</span>
+      <Button 
         onClick={handleOnClick(1)}
         disabled={query.page === totalPages}
       >
         next
-      </button>
+      </Button>
     </>
   );
 };

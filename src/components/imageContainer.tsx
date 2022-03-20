@@ -1,3 +1,4 @@
+import { ImageListItem, ImageListItemBar } from "@mui/material";
 import React from "react";
 
 interface ImageContainerProps {
@@ -6,9 +7,14 @@ interface ImageContainerProps {
   url: string;
 }
 
-const ImageContainer = ({id, url, description} : ImageContainerProps) => {
+const ImageContainer = ({ id, url, description }: ImageContainerProps) => {
   return (
-    <img key={id} src={url} alt={description} />
+    <ImageListItem key={id}>
+      <img src={url} alt={description} />
+      {description && (
+        <ImageListItemBar subtitle={description} />
+      )}
+    </ImageListItem>
   );
 };
 
