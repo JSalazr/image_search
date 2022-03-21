@@ -3,12 +3,14 @@ import _ from "lodash";
 import {SearchQuery } from "../types";
 import { TextField } from "@mui/material";
 
-interface SearchInputProps {
-  query: SearchQuery
+type SearchInputProps = {
+  /** Includes the terms of search: text and page.*/
+  query: SearchQuery;
+  /** setState function to modify the search query. */
   setQuery: Function;
 }
 /**
- * Text input to search images
+ * Text input to search images.
  */
 const SearchInput = ({query, setQuery} : SearchInputProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

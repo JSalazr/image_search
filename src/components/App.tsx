@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SearchInput from "./searchInput";
 import "../App.css";
-import { searchImages } from "../queries/searchQueries";
+import { searchImages } from "../requests/searchRequests";
 import ImageListContainer from "./imageListContainer";
 import { ImageData, SearchResponse, SearchQuery } from "../types";
 import PaginationControl from "./paginationControl";

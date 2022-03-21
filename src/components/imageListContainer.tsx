@@ -3,11 +3,12 @@ import React from "react";
 import { ImageData } from "../types";
 import ImageContainer from "./imageContainer";
 
-interface ImageListContainerProps {
+type ImageListContainerProps = {
+  /** An array containing the information of the searched images. */
   imageList: Array<ImageData>;
 }
 /**
- * Text input to search images
+ * Container that displays the searched images.
  */
 const ImageListContainer = ({ imageList }: ImageListContainerProps) => {
   return (

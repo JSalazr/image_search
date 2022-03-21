@@ -1,46 +1,18 @@
-# Getting Started with Create React App
+# Image Search Coding Test
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is an application that has been developed as a coding test as a job application to HiPeople. The application is a very simple image search utilizing _Unsplash_ API for images. It was developed using Typescript with React.
 
-## Available Scripts
+# Usage
 
-In the project directory, you can run:
+The usage of the application is very simple: There is a search bar on the screen where the user types what kind of images they are looking for. Whenever the user types their terms for search, the application automatically fires a request to the API to search the images, after a small debounce provided by _lodash_'s library.
 
-### `npm start`
+To prevent an extremely heavy response that would potentially crash the application, there is a pagination system implemented. Every page contains 10 images and the user is free to keep changing pages until they find the image they were searching for.
+# Future improvements
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Given the short timeframe for this application (just a couple of hours), there were a few aspects that could use improvement: 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **Better UI**. While the current UI is serviceable, a much better UI could help so much to better showcase the images.
 
-### `npm test`
+- **Sorting**. Unsplash allows sorting for "relevant" and "latest". Implementing this would give more flexibility to the user's search.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Unit tests**.

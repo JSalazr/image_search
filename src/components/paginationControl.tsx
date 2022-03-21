@@ -2,13 +2,16 @@ import { Button } from "@mui/material";
 import React from "react";
 import {SearchQuery } from "../types";
 
-interface PaginationControlProps {
+type PaginationControlProps =  {
+  /** Includes the terms of search: text and page.*/
   query: SearchQuery;
+  /** setState function to modify the search query. */
   setQuery: Function;
+  /** Total number of pages.  */
   totalPages: number;
 }
 /**
- * Text input to search images
+ * Controls the current page of searched images.
  */
 const PaginationControl = ({query, setQuery, totalPages} : PaginationControlProps) => {
   const handleOnClick = (newPage : number) => () => {
