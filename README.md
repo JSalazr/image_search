@@ -11,7 +11,7 @@ To prevent an extremely heavy response that would potentially crash the applicat
 
 Given the short timeframe for this application (just a couple of hours), there were a few aspects that could use improvement: 
 
-- **Better UI**. While the current UI is serviceable, a much better UI could help so much to better showcase the images.
+- **UI improvement**. While the current UI is serviceable, an improved UI could help better display/showcase the images.
 
 - **Sorting**. Unsplash allows sorting for "relevant" and "latest". Implementing this would give more flexibility to the user's search.
 
